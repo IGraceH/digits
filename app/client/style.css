@@ -43,6 +43,10 @@ body .navbar {
   padding-bottom: 20px;
 }
 
+.navbar a.nav-link.active {
+  color: var(--matr-navbar-highlight-text);
+}
+
 footer, footer a {
   color: var(--matr-navbar-text-color);
 }
