@@ -2,17 +2,17 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Col, Container, Row } from 'react-bootstrap';
 import { useTracker } from 'meteor/react-meteor-data';
-import Contact from '../components/Contact';
+import ContactAdmin from '../components/ContactAdmin';
 import { Contacts } from '../../api/contact/Contacts';
 import LoadingSpinner from '../components/LoadingSpinner';
 
-const ListContacts = () => {
+const ListContactsAdmin = () => {
   // useTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
   const { ready, contacts } = useTracker(() => {
     // Note that this subscription will get cleaned up
     // when your component is unmounted or deps change.
     // Get access to Stuff documents.
-    const subscription = Meteor.subscribe(Contacts.userPublicationName);
+    const subscription = Meteor.subscribe(Contacts.adminPublicationName);
     // Determine if the subscription is ready
     const rdy = subscription.ready();
     // Get the Stuff documents
@@ -28,15 +28,15 @@ const ListContacts = () => {
       <Row className="justify-content-center">
         <Col md={7}>
           <Col className="text-center">
-            <h2>List Contacts</h2>
+            <h2>List Contacts (Admin)</h2>
           </Col>
         </Col>
       </Row>
       <Row>
-        {contacts.map((contact, index) => <Col><Contact key={index} info={contact} /></Col>)}
+        {contacts.map((contact, index) => <Col><ContactAdmin key={index} info={contact} /></Col>)}
       </Row>
     </Container>
   ) : <LoadingSpinner />);
 };
 
-export default ListContacts;
+export default ListContactsAdmin;
