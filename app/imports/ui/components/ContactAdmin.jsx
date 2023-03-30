@@ -16,9 +16,7 @@ const ContactAdmin = ({ info }) => (
       <Card.Text>
         {info.description}
       </Card.Text>
-      <Card.Text className="blockquote-footer">
-        {info.owner}
-      </Card.Text>
+      <Card.Text className="blockquote-footer">{info.owner}</Card.Text>
     </Card.Body>
   </Card>
 );
