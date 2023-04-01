@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import { Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Contact = ({ info }) => (
   <Card className="h-100">
@@ -16,6 +17,7 @@ const Contact = ({ info }) => (
       <Card.Text>
         {info.description}
       </Card.Text>
+      <Link to={`/edit/${info._id}`}>Edit</Link>
     </Card.Body>
   </Card>
 );
@@ -28,6 +30,7 @@ Contact.propTypes = {
     address: PropTypes.string,
     image: PropTypes.string,
     description: PropTypes.string,
+    _id: PropTypes.string,
   }).isRequired,
 };
 
