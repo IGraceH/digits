@@ -1,37 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
-import { Image } from 'react-bootstrap';
+import { Image, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Note from './Note';
+import AddNote from './AddNote';
 
-const Contact = ({ info }) => (
+const Contact = ({ contact, notes }) => (
   <Card className="h-100">
     <Card.Header>
-      <Image style={{ width: '75px' }} src={info.image} />
+      <Image style={{ width: '75px' }} src={contact.image} />
       <Card.Title>
-        {info.firstName} {info.lastName}
+        {contact.firstName} {contact.lastName}
       </Card.Title>
-      <Card.Subtitle>{info.address}</Card.Subtitle>
+      <Card.Subtitle>{contact.address}</Card.Subtitle>
     </Card.Header>
     <Card.Body>
       <Card.Text>
-        {info.description}
+        {contact.description}
       </Card.Text>
-      <Link to={`/edit/${info._id}`}>Edit</Link>
+      <ListGroup variant="flush">
+        {notes.map((note, index) => <Note key={index} notes={note} />)}
+      </ListGroup>
+      <AddNote owner={contact.owner} contactId={contact._id} />
+      <Link to={`/edit/${contact._id}`}>Edit</Link>
     </Card.Body>
   </Card>
 );
 
 // Require a document to be passed to this component.
 Contact.propTypes = {
-  info: PropTypes.shape({
+  contact: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     address: PropTypes.string,
     image: PropTypes.string,
     description: PropTypes.string,
+    owner: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
+  notes: PropTypes.arrayOf(PropTypes.shape({
+    note: PropTypes.string,
+    contactId: PropTypes.string,
+    createdAt: PropTypes.instanceOf(Date),
+    _id: PropTypes.string,
+  })).isRequired,
 };
 
 export default Contact;
